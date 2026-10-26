@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grand Stay Hotel</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f7f7f7;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* Navigation Bar */
+        header {
+            background: #173b35;
+            color: white;
+            padding: 18px 7%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .logo {
+            font-size: 27px;
+            font-weight: bold;
+            color: #e8c77b;
+        }
+
+        nav {
+            display: flex;
+            gap: 22px;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+        }
+
+        nav a:hover {
+            color: #e8c77b;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 400px;
+            background:
+                linear-gradient(rgba(0,0,0,0.48), rgba(0,0,0,0.48)),
+                url("https://images.unsplash.com/photo-1566073771259-6a8506099945?w=1600")
+                center/cover;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: white;
+            padding: 35px 20px;
+        }
+
+        .hero h1 {
+            font-size: 45px;
+            margin-bottom: 12px;
+        }
+
+        .hero p {
+            font-size: 18px;
+            margin-bottom: 22px;
+        }
+
+        .btn {
+            display: inline-block;
+            background: #c79d50;
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background: #a77c32;
+        }
+
+        /* Booking Section */
+        .booking {
+            background: white;
+            width: 88%;
+            max-width: 1100px;
+            margin: -35px auto 35px;
+            padding: 25px;
+            position: relative;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px #00000018;
+        }
+
+        .booking h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #173b35;
+        }
+
+        .booking-form {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            align-items: end;
+        }
+
+        .field label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 7px;
+            font-size: 14px;
+        }
+
+        .field input,
+        .field select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background: white;
+        }
+
+        .booking-form .btn {
+            width: 100%;
+        }
+
+        /* General Sections */
+        .section {
+            padding: 35px 7%;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 30px;
+            color: #173b35;
+            margin-bottom: 10px;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 30px;
+        }
+
+        /* Facilities */
+        .facilities {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            text-align: center;
+        }
+
+        .facility {
+            background: white;
+            padding: 22px 12px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px #0000000c;
+        }
+
+        .facility span {
+            font-size: 30px;
+        }
+
+        .facility h3 {
+            color: #173b35;
+            margin-top: 8px;
+        }
+
+        /* Room Cards */
+        .room-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 25px;
+        }
+
+        .room-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px #00000015;
+            transition: transform 0.3s;
+        }
+
+        .room-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .room-card img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .room-info {
+            padding: 20px;
+        }
+
+        .room-info h3 {
+            color: #173b35;
+            font-size: 22px;
+            margin-bottom: 8px;
+        }
+
+        .room-info p {
+            color: #666;
+            margin-bottom: 12px;
+        }
+
+        .room-features {
+            margin: 12px 0;
+            color: #444;
+            font-size: 14px;
+        }
+
+        .price {
+            font-size: 23px;
+            font-weight: bold;
+            color: #b18437;
+            margin: 12px 0;
+        }
+
+        .price small {
+            font-size: 13px;
+            font-weight: normal;
+            color: #666;
+        }
+
+        .room-info .btn {
+            width: 100%;
+            text-align: center;
+        }
+
+        /* Reservation Form */
+        .reservation {
+            background: #eaf0ec;
+            padding: 40px 7%;
+        }
+
+        .reservation-box {
+            max-width: 750px;
+            margin: auto;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px #00000010;
+        }
+
+        .reservation-box h2 {
+            text-align: center;
+            color: #173b35;
+            margin-bottom: 22px;
+        }
+
+        .reservation-form {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 18px;
+        }
+
+        .reservation-form .field input,
+        .reservation-form .field select {
+            width: 100%;
+        }
+
+        .full-width {
+            grid-column: 1 / -1;
+        }
+
+        .reservation-form button {
+            width: 100%;
+        }
+
+        /* Footer */
+        footer {
+            background: #173b35;
+            color: white;
+            text-align: center;
+            padding: 25px 15px;
+        }
+
+        footer p {
+            margin: 5px 0;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 900px) {
+            .room-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+
+            .booking-form {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .facilities {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .hero h1 {
+                font-size: 36px;
+            }
+        }
+
+        @media (max-width: 550px) {
+            header {
+                justify-content: center;
+                text-align: center;
+            }
+
+            nav {
+                justify-content: center;
+                gap: 13px;
+            }
+
+            .hero h1 {
+                font-size: 29px;
+            }
+
+            .hero p {
+                font-size: 16px;
+            }
+
+            .booking {
+                width: 92%;
+                padding: 20px;
+            }
+
+            .booking-form,
+            .room-grid,
+            .facilities,
+            .reservation-form {
+                grid-template-columns: 1fr;
+            }
+
+            .full-width {
+                grid-column: auto;
+            }
+
+            .section {
+                padding: 30px 5%;
+            }
+
+            .section-title {
+                font-size: 26px;
+            }
+
+            .room-card img {
+                height: 210px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <header>
+        <div class="logo">Grand Stay</div>
+
+        <nav>
+            <a href="#home">Home</a>
+            <a href="#facilities">Facilities</a>
+            <a href="#rooms">Our Rooms</a>
+            <a href="#reservation">Book Now</a>
+            <a href="#contact">Contact</a>
+        </nav>
+    </header>
+
+    <!-- Hero Banner -->
+    <section class="hero" id="home">
+        <div>
+            <h1>Welcome to Grand Stay Hotel</h1>
+            <p>Relax, Refresh and Enjoy a Comfortable Stay</p>
+            <a href="#rooms" class="btn">Explore Our Rooms</a>
+        </div>
+    </section>
+
+    <!-- Quick Booking Form -->
+    <section class="booking" id="booking">
+        <h2>Find Your Perfect Stay</h2>
+
+        <form class="booking-form" id="searchForm">
+            <div class="field">
+                <label for="checkin">Check-in</label>
+                <input type="date" id="checkin" required>
+            </div>
+
+            <div class="field">
+                <label for="checkout">Check-out</label>
+                <input type="date" id="checkout" required>
+            </div>
+
+            <div class="field">
+                <label for="guests">Guests</label>
+                <select id="guests">
+                    <option value="1">1 Guest</option>
+                    <option value="2" selected>2 Guests</option>
+                    <option value="3">3 Guests</option>
+                    <option value="4">4 Guests</option>
+                    <option value="5">5 Guests</option>
+                </select>
+            </div>
+
+            <button class="btn" type="submit">Check Availability</button>
+        </form>
+    </section>
+
+    <!-- Facilities -->
+    <section class="section" id="facilities">
+        <h2 class="section-title">Hotel Facilities</h2>
+        <p class="section-subtitle">
+            Everything you need for a relaxing and enjoyable stay.
+        </p>
+
+        <div class="facilities">
+            <div class="facility">
+                <span>📶</span>
+                <h3>Free Wi-Fi</h3>
+                <p>Stay connected</p>
+            </div>
+
+            <div class="facility">
+                <span>🏊</span>
+                <h3>Swimming Pool</h3>
+                <p>Relax and refresh</p>
+            </div>
+
+            <div class="facility">
+                <span>🍽️</span>
+                <h3>Restaurant</h3>
+                <p>Delicious meals</p>
+            </div>
+
+            <div class="facility">
+                <span>🚗</span>
+                <h3>Free Parking</h3>
+                <p>Convenient parking</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Room Categories -->
+    <section class="section" id="rooms">
+        <h2 class="section-title">Our Rooms & Suites</h2>
+        <p class="section-subtitle">
+            Choose a room that matches your comfort and budget.
+        </p>
+
+        <div class="room-grid">
+
+            <!-- Standard Room -->
+            <div class="room-card">
+                <img
+                    src="https://images.unsplash.com/photo-1611892440504-42a792e24d32?w=800"
+                    alt="Comfortable standard hotel room">
+
+                <div class="room-info">
+                    <h3>Standard Room</h3>
+                    <p>A cozy room perfect for solo travellers and couples.</p>
+                    <div class="room-features">
+                        🛏️ Double Bed<br>
+                        📶 Free Wi-Fi<br>
+                        ❄️ Air Conditioning
+                    </div>
+                    <div class="price">₹2,000 <small>/ night</small></div>
+                    <a href="#reservation" class="btn"
+                       onclick="selectRoom('Standard Room')">Reserve Room</a>
+                </div>
+            </div>
+
+            <!-- Deluxe Room -->
+            <div class="room-card">
+                <img
+                    src="https://images.unsplash.com/photo-1590490360182-c33d57733427?w=800"
+                    alt="Elegant deluxe hotel room">
+
+                <div class="room-info">
+                    <h3>Deluxe Room</h3>
+                    <p>A spacious room with elegant interiors and extra comfort.</p>
+                    <div class="room-features">
+                        🛏️ King Bed<br>
+                        📺 Smart TV<br>
+                        ☕ Tea and Coffee
+                    </div>
+                    <div class="price">₹3,500 <small>/ night</small></div>
+                    <a href="#reservation" class="btn"
+                       onclick="selectRoom('Deluxe Room')">Reserve Room</a>
+                </div>
+            </div>
+
+            <!-- Luxury Suite -->
+            <div class="room-card">
+                <img
+                    src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=800"
+                    alt="Luxury hotel suite with premium furnishings">
+
+                <div class="room-info">
+                    <h3>Luxury Suite</h3>
+                    <p>Enjoy premium interiors and a luxurious relaxing space.</p>
+                    <div class="room-features">
+                        🛏️ Premium King Bed<br>
+                        🛋️ Separate Living Area<br>
+                        🛁 Luxury Bathroom
+                    </div>
+                    <div class="price">₹5,500 <small>/ night</small></div>
+                    <a href="#reservation" class="btn"
+                       onclick="selectRoom('Luxury Suite')">Reserve Room</a>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Reservation Form -->
+    <section class="reservation" id="reservation">
+        <div class="reservation-box">
+            <h2>Make a Reservation</h2>
+
+            <form class="reservation-form" id="reservationForm">
+
+                <div class="field">
+                    <label for="name">Full Name</label>
+                    <input type="text" id="name"
+                           placeholder="Enter your name" required>
+                </div>
+
+                <div class="field">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email"
+                           placeholder="Enter your email" required>
+                </div>
+
+                <div class="field">
+                    <label for="phone">Phone Number</label>
+                    <input type="tel" id="phone"
+                           placeholder="Enter phone number"
+                           pattern="[0-9]{10}" maxlength="10" required>
+                </div>
+
+                <div class="field">
+                    <label for="room">Room Category</label>
+                    <select id="room" required>
+                        <option value="">Select a room</option>
+                        <option>Standard Room</option>
+                        <option>Deluxe Room</option>
+                        <option>Luxury Suite</option>
+                    </select>
+                </div>
+
+                <div class="field">
+                    <label for="arrival">Check-in Date</label>
+                    <input type="date" id="arrival" required>
+                </div>
+
+                <div class="field">
+                    <label for="departure">Check-out Date</label>
+                    <input type="date" id="departure" required>
+                </div>
+
+                <div class="field">
+                    <label for="people">Number of Guests</label>
+                    <select id="people">
+                        <option>1</option>
+                        <option selected>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                        <option>5</option>
+                    </select>
+                </div>
+
+                <div class="field">
+                    <label for="requests">Special Requests</label>
+                    <input type="text" id="requests"
+                           placeholder="Optional requests">
+                </div>
+
+                <div class="full-width">
+                    <button type="submit" class="btn">
+                        Submit Reservation
+                    </button>
+                </div>
+
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <h3>Grand Stay Hotel</h3>
+        <p>Your comfort is our priority.</p>
+        <p>📧 Email: info@grandstay.example</p>
+        <p>📞 Phone: +91 98765 43210</p>
+        <p>&copy; 2026 Grand Stay Hotel. All rights reserved.</p>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // Set minimum dates to today
+        const today = new Date();
+        const todayString =
+            today.getFullYear() + "-" +
+            String(today.getMonth() + 1).padStart(2, "0") + "-" +
+            String(today.getDate()).padStart(2, "0");
+
+        ["checkin", "checkout", "arrival", "departure"].forEach(id => {
+            document.getElementById(id).min = todayString;
+        });
+
+        // Keep checkout after check-in
+        function setCheckoutMinimum(checkinId, checkoutId) {
+            const checkin = document.getElementById(checkinId);
+            const checkout = document.getElementById(checkoutId);
+
+            checkin.addEventListener("change", function () {
+                checkout.min = checkin.value || todayString;
+
+                if (checkout.value && checkout.value <= checkin.value) {
+                    checkout.value = "";
+                }
+            });
+        }
+
+        setCheckoutMinimum("checkin", "checkout");
+        setCheckoutMinimum("arrival", "departure");
+
+        // Quick availability form
+        document.getElementById("searchForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+
+            const checkin = document.getElementById("checkin").value;
+            const checkout = document.getElementById("checkout").value;
+
+            if (checkout <= checkin) {
+                alert("Check-out date must be after check-in date.");
+                return;
+            }
+
+            document.getElementById("arrival").value = checkin;
+            document.getElementById("departure").value = checkout;
+            document.getElementById("people").value =
+                document.getElementById("guests").value;
+
+            document.getElementById("reservation").scrollIntoView({
+                behavior: "smooth"
+            });
+
+            alert("Dates selected! Please complete the reservation form.");
+        });
+
+        // Select a room from its room card
+        function selectRoom(roomName) {
+            document.getElementById("room").value = roomName;
+        }
+
+        // Reservation form demonstration
+        document.getElementById("reservationForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+
+            const arrival = document.getElementById("arrival").value;
+            const departure = document.getElementById("departure").value;
+
+            if (departure <= arrival) {
+                alert("Please select a check-out date after your check-in date.");
+                return;
+            }
+
+            alert(
+                "Thank you, " + document.getElementById("name").value +
+                "! Your reservation request has been submitted for " +
+                document.getElementById("room").value +
+                ". This is a demo; no actual booking has been made."
+            );
+        });
+    </script>
+
+</body>
+</html>
